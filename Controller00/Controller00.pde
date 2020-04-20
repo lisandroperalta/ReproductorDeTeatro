@@ -5,50 +5,28 @@ int tamanioTexto=20;
 int altoLinea = 30;
 int margen=50;
 
+ArrayList <Clip> clips;
+
+import controlP5.*;
+ControlP5 cp5;
+
 
 public void setup() {
   size(1200, 800, JAVA2D);
-  String path = sketchPath()+"/videos";
-  filenames = listFileNames(path);
-  printArray(filenames);
+  clips = new ArrayList <Clip>();
+  cargarInterfaz();
 }
 
 public void draw() {
+  textSize(12);
 
   background(50);
-
-  for (int i=0; i<filenames.length; i++) {
-    textSize(tamanioTexto);
-    text (i+" "+filenames[i], margen, margen+altoLinea*i);
+  if (clips.size()>0) {
+    for (int i = 0; i <= clips.size()-1; i++) { 
+      // An ArrayList doesn't know what it is storing so we have to cast the object coming out
+      Clip esteClip = clips.get(i);
+      esteClip.dibujar(i);
+    }
   }
-
-  selectorX=15;
-  selectorY= (mouseY+altoLinea)/altoLinea;
-  //  println("selectorY= "+selectorY+"   mouseY="+mouseY+"   largo:"+filenames.length);
-  println(mouseY);
-  println(mouseY/altoLinea);
-  
-  int posYSelector= selectorY*altoLinea-(altoLinea/2);
-  if (3<5) {
-
-    fill(255);
-    stroke (255);
-    ellipse (margen/2, posYSelector, 10, 10);
-    line(0, posYSelector, width, posYSelector);
-  }
-}
-
-
-
-
-// This function returns all the files in a directory as an array of Strings  
-String[] listFileNames(String dir) {
-  File file = new File(dir);
-  if (file.isDirectory()) {
-    String names[] = file.list();
-    return names;
-  } else {
-    // If it's not a directory
-    return null;
-  }
+  debug();
 }
