@@ -3,13 +3,25 @@
 void levantarNombresArchivos(String dir) {
   ArrayList<File> allFiles = listFilesRecursive(dir);
 
-  for (File f : allFiles) {
-    if (f.isFile()) { 
+for (int i=0; i<allFiles.size(); i++){
+  File f = allFiles.get(i);
+ if (f.isFile()) { 
       println("Name: " + f.getName());
       println("Full path: " + f.getAbsolutePath());
-      clips.add (new Clip(f.getAbsolutePath(), f.getName() ));
-    }
-  }
+      clips.add (new Clip(f.getAbsolutePath(), f.getName(), i ));
+    };
+
+
+}
+
+
+  //for (File f : allFiles) {
+  //  if (f.isFile()) { 
+  //    println("Name: " + f.getName());
+  //    println("Full path: " + f.getAbsolutePath());
+  //    clips.add (new Clip(f.getAbsolutePath(), f.getName() ));
+  //  }
+  //}
 }
 
 // This function returns all the files in a directory as an array of File objects
